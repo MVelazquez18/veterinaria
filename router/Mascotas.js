@@ -17,4 +17,39 @@ router.get('/', async (req, res) =>{
         console.log(error);
     }  
 })
+
+router.get('/crear', (req, res)=>{
+   res.render('crear')
+})
+
+router.post('/', async (req, res) =>{
+    const body = req.body
+    console.log(body)
+    try{
+        const mascotaDB = new Mascota(body)
+        await mascotaDB.save()
+        res.redirect('/mascotas')
+    }catch(error){
+        console.log(error)
+    }
+})
+
+
+router.get('/:id', async (req, res)=>{
+    const id = req.params.id    
+    try{
+        const mascotaDB = await Mascota.findOne({_id: id });
+        console.log(mascotaDB)
+        res.render('detalle', {
+            mascota: mascotaDB, 
+            error: false
+        })
+    }catch(error){
+      console.log(error)
+      res.render('detalle', {
+         error: true, 
+        mensaje:'No se encuentra el id seleccionado'
+     })
+    }  
+})
 module.exports = router;

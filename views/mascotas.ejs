@@ -1,6 +1,11 @@
 <%- include("template/cabecera",{tituloWeb: 'Página de Inicio'}) %>
 
 <div class="container">
+  <h1>CRUD mongo</h1>
+ <a class="btn btn-success d-md-block " href="/mascotas/crear">
+  Crear nueva mascota
+ </a>
+
     <table class="table">
         <thead>
           <tr>
@@ -19,7 +24,11 @@
             <th scope="row"><%= mascotas.id %></th>
             <td><%= mascotas.nombre %></td>
             <td><%= mascotas.descripcion %></td>
-            <td>Button</td>
+            <td>
+              <a href="mascotas/<%= mascotas.id %>" class="btn btn-warning btn-sm">
+                  Editar
+              </a>
+            </td>
           </tr>
    <%  }) %>
    
