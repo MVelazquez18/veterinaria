@@ -73,4 +73,23 @@ router.delete('/:id', async (req, res)=>{
     }
 })
 
+router.put('/:id', async(req, res)=>{
+     const id = req.params.id
+     const body= req.body     
+    try{
+    const mascotaDB = await Mascota.findByIdAndUpdate( id, body, {useFindAndModify: false})
+    console.log(mascotaDB)
+    res.json({
+        estado: true,
+        mensaje: "Editado"
+    })
+    }catch(error){
+        res.json({
+            estado: true,
+            mensaje: "Editado"        
+         }) 
+   }
+})
+
+
 module.exports = router;
